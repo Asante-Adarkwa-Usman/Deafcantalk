@@ -12,21 +12,15 @@ class VideoList extends StatefulWidget {
 
 class _VideoListState extends State<VideoList> {
   final List<YoutubePlayerController> _controllers = [
-    'IgmB9c29UKU',
-    'iLnmTe5Q2Qw',
-    '_WoCV4c6XOE',
-    'KmzdUe0RSJo',
-    '6jZDSSZZxjQ',
-    'p2lYr3vM_1w',
-    '7QUtEmBT_-w',
-    '34_PXCzGw1M',
+    'iB8mkKkPxJQ',
+    'R0ZcZE5FxSg',
+    'QxzrhVkB7L4',
+    'i0uXwiknjg8',
   ]
       .map<YoutubePlayerController>(
         (videoId) => YoutubePlayerController(
           initialVideoId: videoId,
-          flags: const YoutubePlayerFlags(
-            autoPlay: false,
-          ),
+          flags: const YoutubePlayerFlags(autoPlay: false),
         ),
       )
       .toList();
@@ -34,9 +28,6 @@ class _VideoListState extends State<VideoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Video List Demo'),
-      ),
       body: ListView.separated(
         itemBuilder: (context, index) {
           return YoutubePlayer(
