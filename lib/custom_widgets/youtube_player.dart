@@ -1,10 +1,7 @@
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import 'video_list.dart';
 
 /// Homepage
 class YoutubePlayerView extends StatefulWidget {
@@ -24,17 +21,13 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
   double _volume = 100;
   bool _muted = false;
   bool _isPlayerReady = false;
+  late String id;
 
   final List<String> _ids = [
+    'iB8mkKkPxJQ',
     'R0ZcZE5FxSg',
-    'iNJUdy_JDzo',
-    'SarMSwv_aHI',
-    '0FcwzMq4iWg',
-    'p2lYr3vM_1w',
-    '7QUtEmBT_-w',
-    '34_PXCzGw1M',
-    '6jZDSSZZxjQ',
-    'KmzdUe0RSJo',
+    'QxzrhVkB7L4',
+    'i0uXwiknjg8',
   ];
 
   @override
@@ -44,7 +37,7 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
       initialVideoId: _ids.first,
       flags: const YoutubePlayerFlags(
         mute: false,
-        autoPlay: true,
+        autoPlay: false,
         disableDragSeek: false,
         loop: false,
         isLive: false,
@@ -92,7 +85,7 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
-        progressIndicatorColor: Colors.blueAccent,
+        progressIndicatorColor: const Color.fromRGBO(0, 153, 156, 1),
         topActions: <Widget>[
           const SizedBox(width: 8.0),
           Expanded(
@@ -127,30 +120,6 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
         },
       ),
       builder: (context, player) => Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: Image.asset(
-              'assets/ypf.png',
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-          title: const Text(
-            'DeafCanTalk Youtube Play List',
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.video_library),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const VideoList(),
-                ),
-              ),
-            ),
-          ],
-        ),
         body: ListView(
           children: [
             player,
@@ -177,33 +146,6 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
                         'Playback Rate',
                         '${_controller.value.playbackRate}x  ',
                       ),
-                    ],
-                  ),
-                  _space,
-                  TextField(
-                    enabled: _isPlayerReady,
-                    controller: _idController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter youtube <video id> or <link>',
-                      fillColor: Colors.blueAccent.withAlpha(20),
-                      filled: true,
-                      hintStyle: const TextStyle(
-                        fontWeight: FontWeight.w300,
-                        color: Colors.blueAccent,
-                      ),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () => _idController.clear(),
-                      ),
-                    ),
-                  ),
-                  _space,
-                  Row(
-                    children: [
-                      _loadCueButton('LOAD'),
-                      const SizedBox(width: 10.0),
-                      _loadCueButton('CUE'),
                     ],
                   ),
                   _space,
@@ -249,7 +191,7 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
                       ),
                       FullScreenButton(
                         controller: _controller,
-                        color: Colors.blueAccent,
+                        color: const Color.fromRGBO(0, 153, 156, 1),
                       ),
                       IconButton(
                         icon: const Icon(Icons.skip_next),
@@ -267,11 +209,15 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
                     children: <Widget>[
                       const Text(
                         "Volume",
-                        style: TextStyle(fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          color: Color.fromRGBO(0, 153, 156, 1),
+                        ),
                       ),
                       Expanded(
                         child: Slider(
                           inactiveColor: Colors.transparent,
+                          activeColor: const Color.fromRGBO(0, 153, 156, 1),
                           value: _volume,
                           min: 0.0,
                           max: 100.0,
@@ -290,22 +236,6 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
                     ],
                   ),
                   _space,
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 800),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      color: _getStateColor(_playerState),
-                    ),
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      _playerState.toString(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -320,14 +250,14 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
       text: TextSpan(
         text: '$title : ',
         style: const TextStyle(
-          color: Colors.blueAccent,
+          color: Color.fromRGBO(0, 153, 156, 1),
           fontWeight: FontWeight.bold,
         ),
         children: [
           TextSpan(
             text: value,
             style: const TextStyle(
-              color: Colors.blueAccent,
+              color: Color.fromRGBO(0, 153, 156, 1),
               fontWeight: FontWeight.w300,
             ),
           ),
@@ -336,65 +266,65 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
     );
   }
 
-  Color _getStateColor(PlayerState state) {
-    switch (state) {
-      case PlayerState.unknown:
-        return Colors.grey[700]!;
-      case PlayerState.unStarted:
-        return Colors.pink;
-      case PlayerState.ended:
-        return Colors.red;
-      case PlayerState.playing:
-        return Colors.blueAccent;
-      case PlayerState.paused:
-        return Colors.orange;
-      case PlayerState.buffering:
-        return Colors.yellow;
-      case PlayerState.cued:
-        return Colors.blue[900]!;
-      default:
-        return Colors.blue;
-    }
-  }
+  // Color _getStateColor(PlayerState state) {
+  //   switch (state) {
+  //     case PlayerState.unknown:
+  //       return Colors.grey[700]!;
+  //     case PlayerState.unStarted:
+  //       return Colors.pink;
+  //     case PlayerState.ended:
+  //       return Colors.red;
+  //     case PlayerState.playing:
+  //       return Colors.blueAccent;
+  //     case PlayerState.paused:
+  //       return Colors.orange;
+  //     case PlayerState.buffering:
+  //       return Colors.yellow;
+  //     case PlayerState.cued:
+  //       return Colors.blue[900]!;
+  //     default:
+  //       return const Color.fromRGBO(0, 153, 156, 1);
+  //   }
+  // }
 
   Widget get _space => const SizedBox(height: 10);
 
-  Widget _loadCueButton(String action) {
-    return Expanded(
-      child: MaterialButton(
-        color: Colors.blueAccent,
-        onPressed: _isPlayerReady
-            ? () {
-                if (_idController.text.isNotEmpty) {
-                  var id = YoutubePlayer.convertUrlToId(
-                        _idController.text,
-                      ) ??
-                      '';
-                  if (action == 'LOAD') _controller.load(id);
-                  if (action == 'CUE') _controller.cue(id);
-                  FocusScope.of(context).requestFocus(FocusNode());
-                } else {
-                  _showSnackBar('Source can\'t be empty!');
-                }
-              }
-            : null,
-        disabledColor: Colors.grey,
-        disabledTextColor: Colors.black,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14.0),
-          child: Text(
-            action,
-            style: const TextStyle(
-              fontSize: 18.0,
-              color: Colors.white,
-              fontWeight: FontWeight.w300,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _loadCueButton(String action) {
+  //   return Expanded(
+  //     child: MaterialButton(
+  //       color: Colors.blueAccent,
+  //       onPressed: _isPlayerReady
+  //           ? () {
+  //               if (_idController.text.isNotEmpty) {
+  //                 var id = YoutubePlayer.convertUrlToId(
+  //                       _idController.text,
+  //                     ) ??
+  //                     '';
+  //                 if (action == 'LOAD') _controller.load(id);
+  //                 if (action == 'CUE') _controller.cue(id);
+  //                 FocusScope.of(context).requestFocus(FocusNode());
+  //               } else {
+  //                 _showSnackBar('Source can\'t be empty!');
+  //               }
+  //             }
+  //           : null,
+  //       disabledColor: Colors.grey,
+  //       disabledTextColor: Colors.black,
+  //       child: Padding(
+  //         padding: const EdgeInsets.symmetric(vertical: 14.0),
+  //         child: Text(
+  //           action,
+  //           style: const TextStyle(
+  //             fontSize: 18.0,
+  //             color: Colors.white,
+  //             fontWeight: FontWeight.w300,
+  //           ),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(

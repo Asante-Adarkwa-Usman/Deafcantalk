@@ -1,5 +1,5 @@
 import 'package:deafcantalk/custom_widgets/youtube_player.dart';
-import 'package:deafcantalk/views/main/news_view.dart';
+import 'package:deafcantalk/shared_widgets/category_player.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -48,33 +48,58 @@ class HomeView extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => const NewsView()));
+                        builder: (BuildContext context) =>
+                            const CategoryPlayer(title: 'News')));
               },
               title: 'News',
               cardColor: const Color.fromRGBO(0, 54, 79, 1),
               icon: Icons.book_outlined,
             ),
-            const CategoryCard(
-                onTap: null,
+            CategoryCard(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const CategoryPlayer(title: 'Sports')));
+                },
                 title: 'Sports',
-                cardColor: Color.fromRGBO(233, 0, 50, 1),
+                cardColor: const Color.fromRGBO(233, 0, 50, 1),
                 icon: Icons.sports_hockey_outlined),
-            const CategoryCard(
-              onTap: null,
+            CategoryCard(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const CategoryPlayer(title: 'Religion')));
+              },
               title: 'Religion',
-              cardColor: Color.fromARGB(255, 55, 178, 235),
+              cardColor: const Color.fromARGB(255, 55, 178, 235),
               icon: Icons.menu_book_outlined,
             ),
-            const CategoryCard(
-              onTap: null,
+            CategoryCard(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const CategoryPlayer(title: 'Business')));
+              },
               title: 'Business',
-              cardColor: Color.fromRGBO(79, 89, 12, 1),
+              cardColor: const Color.fromRGBO(79, 89, 12, 1),
               icon: Icons.money_outlined,
             ),
-            const CategoryCard(
-                onTap: null,
+            CategoryCard(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const CategoryPlayer(title: 'Education')));
+                },
                 title: 'Education',
-                cardColor: Color.fromRGBO(86, 0, 61, 1),
+                cardColor: const Color.fromRGBO(86, 0, 61, 1),
                 icon: Icons.school_outlined),
           ],
         ),
