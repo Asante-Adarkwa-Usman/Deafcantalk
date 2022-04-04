@@ -26,15 +26,15 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
   bool _isPlayerReady = false;
 
   final List<String> _ids = [
-    'nPt8bK2gbaU',
-    'gQDByCdjUXw',
-    'iLnmTe5Q2Qw',
-    '_WoCV4c6XOE',
-    'KmzdUe0RSJo',
-    '6jZDSSZZxjQ',
+    'R0ZcZE5FxSg',
+    'iNJUdy_JDzo',
+    'SarMSwv_aHI',
+    '0FcwzMq4iWg',
     'p2lYr3vM_1w',
     '7QUtEmBT_-w',
     '34_PXCzGw1M',
+    '6jZDSSZZxjQ',
+    'KmzdUe0RSJo',
   ];
 
   @override
@@ -136,7 +136,7 @@ class _YoutubePlayerView extends State<YoutubePlayerView> {
             ),
           ),
           title: const Text(
-            'Youtube Player Flutter',
+            'DeafCanTalk Youtube Play List',
             style: TextStyle(color: Colors.white),
           ),
           actions: [

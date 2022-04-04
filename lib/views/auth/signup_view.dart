@@ -45,7 +45,6 @@ class SignupView extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.w600,
-                            fontStyle: FontStyle.italic,
                             color: Color.fromRGBO(0, 153, 156, 1)),
                       ),
                       const SizedBox(height: 30),
@@ -53,7 +52,7 @@ class SignupView extends StatelessWidget {
                         child: Column(
                           children: [
                             const CustomTextFormField(
-                              label: Text('Fullname'),
+                              label: Text('Full name'),
                               hint: 'Enter your fullname',
                               keyboardType: TextInputType.text,
                               prefixIcon: Icon(Icons.person,

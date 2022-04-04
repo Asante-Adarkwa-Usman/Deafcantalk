@@ -1,4 +1,5 @@
 import 'package:deafcantalk/custom_widgets/youtube_player.dart';
+import 'package:deafcantalk/views/main/news_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -42,15 +43,20 @@ class HomeView extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
-            const CategoryCard(
-              onTap: null,
+            CategoryCard(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const NewsView()));
+              },
               title: 'News',
-              cardColor: Color.fromRGBO(0, 54, 79, 1),
+              cardColor: const Color.fromRGBO(0, 54, 79, 1),
               icon: Icons.book_outlined,
             ),
             const CategoryCard(
                 onTap: null,
-                title: 'News',
+                title: 'Sports',
                 cardColor: Color.fromRGBO(233, 0, 50, 1),
                 icon: Icons.sports_hockey_outlined),
             const CategoryCard(
